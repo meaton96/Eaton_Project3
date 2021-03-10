@@ -26,6 +26,14 @@ public class Queen {
                 return true;
             }
         }
+        testPosition = boardPosition.copy();
+        while (testPosition.getRow() > 0) {
+            testPosition.decrementRow();
+            testPosition.incrementCol();
+            if (testPosition.equals(otherQueen.boardPosition)) {
+                return true;
+            }
+        }
         return false;
     }
     public boolean conflicts(BoardPosition otherPos) {
