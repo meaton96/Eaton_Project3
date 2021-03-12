@@ -68,6 +68,12 @@ public class LinkedStack<E> implements Cloneable
         return returnValue;
     }
 
+    public void clear() {
+        for (int x = 0; x < size(); x++) {
+            pop();
+        }
+    }
+
 
     /**
      * Generate a copy of this stack.
