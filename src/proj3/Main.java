@@ -15,23 +15,14 @@ public class Main {
         int columnCount = 1;
         int boardSize = 4;
         int numSolutions = 0;
-       /* while (runScenario(columnCount, boardSize) && columnCount <= boardSize) {
-            for (int x = 0; x < queenStack.size(); x++) {
-                System.out.print(queenStack.pop() + "\t");
-            }
-            System.out.println("\n");
-            columnCount++;
-            numSolutions++;
-        }
-
-        */
-        runScenario(8);
+        
+        runScenario(5);
     }
 
     public static void runScenario(int boardSize) {
         int start = 1;
         int startingCol = start;
-        int startingRow = 2;
+        int startingRow = 1;
         boolean wasRemoved = false;
         int solCount = 0;
         while (true) {
@@ -71,6 +62,7 @@ public class Main {
                 }
             }
             System.out.println("Solution: " + ++solCount);
+            
             for (int x = 0; x < boardSize; x++) {
                 System.out.print(queenStack.pop() + "\t");
             }
