@@ -48,4 +48,7 @@ public class Queen {
     public String toString() {
         return boardPosition.toString();
     }
+    public Queen copy() {
+        return new Queen(boardPosition.copy());
+    }
 }

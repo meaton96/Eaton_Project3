@@ -1,3 +1,11 @@
+package utility;
+
+import adt.LinkedStack;
+import utility.Board;
+import utility.Utility;
+
+import java.util.HashSet;
+
 /**
  * A blind depth first search. This one is similar to the naive
  * blind search but instead of trying every single possible
@@ -26,7 +34,7 @@ public class BlindSearchIntermediate {
         int configurations = -1; // The initial configuration doesn't count.
         
         // Create stack and push the initial state of the board.
-        Stack<Board> stack = new Stack<>();
+        LinkedStack<Board> stack = new LinkedStack<>();
         stack.push(new Board(n));
         
         // Depth first search.
@@ -45,7 +53,7 @@ public class BlindSearchIntermediate {
             // Check for duplicates.
             if (!history.add(board.toString())) continue;
             
-            if (debug) Utility.debug(board);
+           // if (debug) utility.debug(board);
             
             // Check to see if achieved final goal.
             if (board.totalQueens() == n && board.numberOfQueensUnderAttack() == 0) {

@@ -1,6 +1,7 @@
 package proj3;
 
 import adt.LinkedStack;
+import utility.BlindSearchIntermediate;
 
 import java.util.EmptyStackException;
 
@@ -17,6 +18,7 @@ public class Main {
         int numSolutions = 0;
         
         runScenario(5);
+        //BlindSearchIntermediate.search(8, 100000, false);
     }
 
     public static void runScenario(int boardSize) {
@@ -25,9 +27,12 @@ public class Main {
         int startingRow = 1;
         boolean wasRemoved = false;
         int solCount = 0;
+        Queen queen = new Queen(start, startingRow);
         while (true) {
-            queenStack.push(new Queen(start, 1));
-
+            queenStack.push(queen);
+         //   for (int x = 0; x < queenStack.size(); x++)
+           //     System.out.print(queenStack.itemAt(x) + "\t");
+            //System.out.println();
             while (queenStack.size() < boardSize) {
               //  System.out.print("stack:\t");
                 /*for (int x = 0; x < queenStack.size(); x++) {
@@ -35,7 +40,9 @@ public class Main {
                 }*/
               //  System.out.println();
                 if (runSingleScenario(boardSize, startingCol, startingRow, wasRemoved)) {
-                    startingRow = queenStack.peek().getBoardPosition().getRow();
+                    startingRow = queenStack.peek()
+                            .getBoardPosition()
+                            .getRow();
                     startingCol = 1;
                     wasRemoved = false;
                     continue;
@@ -55,17 +62,43 @@ public class Main {
                     return;
                 }
             }
-            for (int x = 1; x < boardSize; x++) {
+            /*for (int x = 1; x < boardSize; x++) {
                 if (queenStack.itemAt(x).getBoardPosition().getRow() == 1) {
                     start = queenStack.itemAt(x).getBoardPosition().getCol();
                     break;
                 }
             }
+            start = queenStack.itemAt(boardSize - 1)
+                    .getBoardPosition()
+                    .getCol() + 1;
+            */
             System.out.println("Solution: " + ++solCount);
-            
+
+
             for (int x = 0; x < boardSize; x++) {
-                System.out.print(queenStack.pop() + "\t");
+                System.out.print(queenStack.itemAt(x) + "\t");
             }
+
+            /*for (int x = 0; x < boardSize - 2; x++) {
+                queenStack.pop();
+            }*/
+           /* System.out.println("queen: " + queen);
+            System.out.print("\nS2: ");
+            for (int x = 0; x < queenStack.size(); x++) {
+                System.out.print(queenStack.itemAt(x) + "\t");
+            }
+            if (start > boardSize)
+                start = 1;
+            */
+            while (queenStack.peek().getBoardPosition().getCol() + 1 > boardSize)
+                queen = queenStack.pop();
+
+            try {
+                new Thread().sleep(1000);
+            } catch (Exception e) {}
+            queen.getBoardPosition().incrementCol();
+
+
             System.out.println("\n");
 
             //System.out.println("removing queen: " + queenStack.peek());
