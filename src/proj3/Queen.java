@@ -1,5 +1,7 @@
 package proj3;
 
+import adt.LinkedStack;
+
 public class Queen {
 
     private final BoardPosition boardPosition;
@@ -39,6 +41,13 @@ public class Queen {
     public boolean conflicts(BoardPosition otherPos) {
         return conflicts(new Queen(otherPos));
     }
+    public boolean conflicts(LinkedStack<Queen> queenStack) {
+        for (int x = 0; x < queenStack.size(); x++) {
+            if (conflicts(queenStack.itemAt(x)))
+                return true;
+        }
+        return false;
+    }
 
     public BoardPosition getBoardPosition() {
         return boardPosition;
@@ -50,5 +59,8 @@ public class Queen {
     }
     public Queen copy() {
         return new Queen(boardPosition.copy());
+    }
+    public boolean isOnBoard(int max) {
+        return boardPosition.getCol() <= max && boardPosition.getRow() <= max;
     }
 }

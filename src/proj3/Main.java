@@ -13,13 +13,65 @@ public class Main {
     public static void main(String[] args) {
 
         queenStack = new LinkedStack<>();
-        int columnCount = 1;
-        int boardSize = 4;
-        int numSolutions = 0;
+        run(4);
         
-        runScenario(5);
+        //runScenario(5);
+
         //BlindSearchIntermediate.search(8, 100000, false);
     }
+    public static void run(int boardSize) {
+
+        Queen baseQueen = new Queen(1,1);
+        int numSolutions = 0;
+        queenStack.push(baseQueen);
+        int startCol = 1;
+        int startRow = 2;
+        while (true) {
+            while (queenStack.size() < boardSize) {
+                Queen queen = new Queen(startCol, startRow);
+
+                System.out.println("created queen at " + queen);
+
+                while (queen.isOnBoard(boardSize)) {
+                    System.out.println("testing queen: " + queen);
+                    if (queen.conflicts(queenStack)) {
+                        queen.getBoardPosition().incrementCol();
+                        continue;
+                    }
+                    System.out.println("adding Queen at: " + queen);
+                    queenStack.push(queen);
+                    queen = new Queen(startCol, queen.getBoardPosition().getRow());
+                    queen.getBoardPosition().incrementRow();
+
+                }
+                if (queenStack.peek().equals(baseQueen)) {
+                    baseQueen.getBoardPosition().incrementCol();
+                    continue;
+                }
+                queenStack.pop();
+            }
+            if (queenStack.isEmpty()) {
+                System.out.println("Number of Solutions: " + numSolutions);
+                return;
+            }
+            System.out.println("solution: " + ++numSolutions + "\n");
+            for (int x = 0; x < boardSize; x++) {
+                System.out.print(queenStack.itemAt(x));
+            }
+            queenStack.pop();
+            startCol++;
+            //infinite loop
+
+        }
+
+
+
+    }
+
+
+
+
+
 
     public static void runScenario(int boardSize) {
         int start = 1;

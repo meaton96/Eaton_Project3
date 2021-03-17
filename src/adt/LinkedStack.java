@@ -140,7 +140,6 @@ public class LinkedStack<E> implements Cloneable
         return top.getData( );
     }
 
-
     /**
      * Get the top item, removing it from this stack.
      * @param - none
