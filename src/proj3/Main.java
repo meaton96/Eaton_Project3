@@ -92,12 +92,16 @@ public class Main {
             */
             while (queenStack.peek().getBoardPosition().getCol() + 1 > boardSize)
                 queen = queenStack.pop();
+            if (queenStack.isEmpty()) {
+                System.out.println("Solution count: " + solCount);
+                return;
+            }
 
             try {
                 new Thread().sleep(1000);
             } catch (Exception e) {}
             queen.getBoardPosition().incrementCol();
-
+            
 
             System.out.println("\n");
 
