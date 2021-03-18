@@ -48,11 +48,18 @@ public class LinkedStack<E> implements Cloneable
     {
         top = null;
     }
-
-
+    
+    /**
+     * retrieve the item at the specified location in the stack
+     * @param down number of spaces down to get from
+     * @throws IllegalArgumentException if down is larger than the stack size
+     * @return the item at down locations in the stack
+     */
     public E itemAt(int down) {
         if (down == 0)
             return peek();
+        if (down > size())
+            throw new IllegalArgumentException("Down is larger than the stack");
 
         LinkedStack<E> tempStack = new LinkedStack<>();
         E returnValue;
@@ -67,14 +74,7 @@ public class LinkedStack<E> implements Cloneable
 
         return returnValue;
     }
-
-    public void clear() {
-        for (int x = 0; x < size(); x++) {
-            pop();
-        }
-    }
-
-
+    
     /**
      * Generate a copy of this stack.
      * @param - none

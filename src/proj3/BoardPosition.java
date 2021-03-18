@@ -13,7 +13,6 @@ public class BoardPosition {
     public void incrementRow() { row++; }
     public void incrementCol() { col++; }
     public void decrementRow() { row--; }
-    public void decrementCol() { col--; }
     public void decrementPos() { col--; row--; }
     public void incrementPos() { col++; row++; }
     public int getRow() { return row; }

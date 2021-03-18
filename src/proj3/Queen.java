@@ -5,17 +5,16 @@ import adt.LinkedStack;
 public class Queen {
 
     private final BoardPosition boardPosition;
-
-    public Queen(BoardPosition position) {
-        boardPosition = position.copy();
-    }
+    
     public Queen(int x, int y) {
         boardPosition = new BoardPosition(x, y);
     }
-
-    public boolean locEquals(BoardPosition otherPos) {
-        return boardPosition.equals(otherPos);
-    }
+    
+    /**
+     *
+     * @param otherQueen
+     * @return
+     */
     public boolean conflicts(Queen otherQueen) {
         if (otherQueen.boardPosition.getCol() == boardPosition.getCol() ||
             otherQueen.boardPosition.getRow() == boardPosition.getRow()) {
@@ -38,9 +37,6 @@ public class Queen {
         }
         return false;
     }
-    public boolean conflicts(BoardPosition otherPos) {
-        return conflicts(new Queen(otherPos));
-    }
     public boolean conflicts(LinkedStack<Queen> queenStack) {
         for (int x = 0; x < queenStack.size(); x++) {
             if (conflicts(queenStack.itemAt(x)))
@@ -56,9 +52,6 @@ public class Queen {
     @Override
     public String toString() {
         return boardPosition.toString();
-    }
-    public Queen copy() {
-        return new Queen(boardPosition.copy());
     }
     public boolean isOnBoard(int max) {
         return boardPosition.getCol() <= max && boardPosition.getRow() <= max;
